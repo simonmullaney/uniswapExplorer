@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {UniswapService} from '../../services/uniswap.service'
 
 @Component({
   selector: 'app-table',
@@ -7,9 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TableComponent implements OnInit {
 
-  constructor() { }
+  constructor(public uniswapService: UniswapService) { }
 
   ngOnInit(): void {
+    this.uniswapService.getUniswapData()
   }
 
 }
