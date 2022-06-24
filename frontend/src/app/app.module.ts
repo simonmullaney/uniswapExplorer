@@ -5,17 +5,18 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ExplorerComponent } from './components/explorer/explorer.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { TableComponent } from './components/table/table.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ExplorerComponent,
-    NavbarComponent
+    NavbarComponent,
+    TableComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
-  ],
+    AppRoutingModule  ],
   providers: [],
   bootstrap: [AppComponent]
 })
