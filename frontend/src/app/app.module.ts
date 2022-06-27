@@ -6,13 +6,15 @@ import { AppComponent } from './app.component';
 import { ExplorerComponent } from './components/explorer/explorer.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { TableComponent } from './components/table/table.component';
+import { TransactionModalComponent } from './components/transaction-modal/transaction-modal.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ExplorerComponent,
     NavbarComponent,
-    TableComponent
+    TableComponent,
+    TransactionModalComponent
   ],
   imports: [
     BrowserModule,

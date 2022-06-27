@@ -5,6 +5,7 @@
       <th scope="col">Tx Index</th>
       <th scope="col">Block No.</th>
       <th scope="col">Event type</th>
+      <th scope="col"></th>
     </tr>
   </thead>
   <tbody>
@@ -13,5 +14,6 @@
         <td>{{data.transactionIndex}}</td>
         <td>{{data.blockNumber}}</td>
         <td>{{data.event}}</td>
+        <td><i (click)=this.uniswapService.showModal(this.uniswapService.uniswapTableArguments[i],data.event) class="fa-solid fa-circle-info"></i> </td>
   </tbody>
 </table>
