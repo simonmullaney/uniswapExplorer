@@ -19,12 +19,12 @@ exports.getUniswapData = async(request, response, next) => {
     const transferEvents = await uniswapInterface.queryFilter(eventFilter,currentBlock-10,currentBlock);
     console.log("transferEvents: ",transferEvents);
 
-  return response.status(200).json({
-        'data': transferEvents,
-        'message': 'Success',
-        'status': 'success',
-        'response': 200
-      });
+    return response.status(200).json({
+          'data': transferEvents,
+          'message': 'Success',
+          'status': 'success',
+          'response': 200
+    });
   } catch (error) {
     console.error(`Failed to evaluate transaction: ${error}`);
     return response.status(500).json({
