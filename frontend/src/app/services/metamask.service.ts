@@ -89,17 +89,15 @@ export class MetamaskService {
   }
 
   public isLoggedIn(){
-    console.log("isLoggedIn");
-
     if(localStorage.getItem('jwt')){
-      console.log("true");
-
       return true
     }else{
-      console.log("false");
-
       return false
     }
+  }
+
+  public logout(){
+    localStorage.removeItem('jwt')
   }
 
 }
