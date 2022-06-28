@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpClient,HttpHeaders } from '@angular/common/http';
-import { Auth, signOut, signInWithCustomToken } from '@angular/fire/auth';
 import detectEthereumProvider from '@metamask/detect-provider';
 import config from './../config.json';
 import {UniswapService} from './uniswap.service'
@@ -19,7 +18,7 @@ export class MetamaskService {
   nonce:any;
   jwt:string = '';
 
-  constructor(private httpClient: HttpClient, private auth: Auth,private uniswapService: UniswapService) { }
+  constructor(private httpClient: HttpClient, private uniswapService: UniswapService) { }
 
   public async signInWithMetaMask() {
     console.log("signInWithMetaMask");
@@ -87,6 +86,20 @@ export class MetamaskService {
       .split('')
       .map((c) => c.charCodeAt(0).toString(16).padStart(2, '0'))
       .join('');
+  }
+
+  public isLoggedIn(){
+    console.log("isLoggedIn");
+
+    if(localStorage.getItem('jwt')){
+      console.log("true");
+
+      return true
+    }else{
+      console.log("false");
+
+      return false
+    }
   }
 
 }

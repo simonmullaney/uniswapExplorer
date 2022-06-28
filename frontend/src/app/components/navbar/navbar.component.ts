@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { MetamaskService } from '../../services/metamask.service'
 
 @Component({
   selector: 'app-navbar',
@@ -8,13 +7,11 @@ import { MetamaskService } from '../../services/metamask.service'
 })
 export class NavbarComponent implements OnInit {
 
-  constructor(public metamaskService: MetamaskService) { }
+  constructor() { }
 
   ngOnInit(): void {
   }
 
-  login(){
-    this.metamaskService.signInWithMetaMask();
-  }
+
 
 }

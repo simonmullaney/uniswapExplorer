@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {UniswapService} from '../../services/uniswap.service'
+import {MetamaskService} from '../../services/metamask.service'
 
 @Component({
   selector: 'app-explorer',
@@ -8,7 +9,10 @@ import {UniswapService} from '../../services/uniswap.service'
 })
 export class ExplorerComponent implements OnInit {
 
-  constructor(public uniswapService: UniswapService) { }
+  constructor(
+    public uniswapService: UniswapService,
+    public metamaskService: MetamaskService
+  ) { }
 
   ngOnInit(): void {
     localStorage.removeItem('jwt')
