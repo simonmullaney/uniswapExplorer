@@ -11,6 +11,7 @@ export class ExplorerComponent implements OnInit {
   constructor(public uniswapService: UniswapService) { }
 
   ngOnInit(): void {
+    localStorage.removeItem('jwt')
   }
 
 }

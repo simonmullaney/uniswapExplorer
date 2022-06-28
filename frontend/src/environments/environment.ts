@@ -3,14 +3,13 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
+  firebase: {
+    projectId: 'uniswapexplorer',
+    appId: '1:612013710526:web:07376a17019381686252ef',
+    storageBucket: 'uniswapexplorer.appspot.com',
+    apiKey: 'AIzaSyDZGQ7O8m4xERLftnnVaDFNUO-vVgGWvvI',
+    authDomain: 'uniswapexplorer.firebaseapp.com',
+    messagingSenderId: '612013710526',
+  },
   production: false
 };
-
-/*
- * For easier debugging in development mode, you can import the following file
- * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.
- *
- * This import should be commented out in production mode because it will have a negative impact
- * on performance if an error is thrown.
- */
-// import 'zone.js/plugins/zone-error';  // Included with Angular CLI.

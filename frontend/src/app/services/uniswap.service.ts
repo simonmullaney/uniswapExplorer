@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient,HttpHeaders } from '@angular/common/http';
 import config from './../config.json';
 
 
@@ -21,7 +21,16 @@ export class UniswapService {
   getUniswapData(){
     let __this = this;
     console.log("Getting uniswap data...");
-    return this.httpClient.get(config.apiUrl + '/uniswap')
+
+    // console.log(this.metamaskService.jwt);
+    let jwt = localStorage.getItem('jwt')
+
+    console.log(`Bearer ${jwt}`);
+    const headers = new HttpHeaders({'Authorization':`Bearer ${jwt}`});
+
+    console.log(headers);
+
+    return this.httpClient.get(config.apiUrl + '/uniswap',{headers:headers})
     .toPromise()
     .then((response: any) => {
       __this.uniswapTableData = response.data.transferEvents;

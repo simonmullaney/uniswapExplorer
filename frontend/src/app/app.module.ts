@@ -7,6 +7,11 @@ import { ExplorerComponent } from './components/explorer/explorer.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { TableComponent } from './components/table/table.component';
 import { TransactionModalComponent } from './components/transaction-modal/transaction-modal.component';
+import { MetamaskService } from "./services/metamask.service";
+import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
+import { environment } from '../environments/environment';
+import { provideAuth, getAuth } from '@angular/fire/auth';
+import { provideFirestore, getFirestore } from '@angular/fire/firestore';
 
 @NgModule({
   declarations: [
@@ -19,7 +24,11 @@ import { TransactionModalComponent } from './components/transaction-modal/transa
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule  ],
+    HttpClientModule,
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideAuth(() => getAuth()),
+    provideFirestore(() => getFirestore())
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })
