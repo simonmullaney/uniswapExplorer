@@ -4,3 +4,6 @@
 .loginButton{
   border-radius: 8px;
 }
+.navbar-brand{
+  padding-left: 5px;
+}
