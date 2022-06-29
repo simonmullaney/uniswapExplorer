@@ -63,7 +63,8 @@ export class MetamaskService {
       return
     }
   }
-  //convert string to hex
+  
+  //function convert string to hex
   private toHex(stringToConvert: string) {
     return stringToConvert
       .split('')
