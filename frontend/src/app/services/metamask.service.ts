@@ -5,12 +5,6 @@ import config from './../config.json';
 import {UniswapService} from './uniswap.service'
 
 
-interface NonceResponse {
-  nonce: string;
-}
-interface VerifyResponse {
-  token: string;
-}
 @Injectable({
   providedIn: 'root'
 })
@@ -97,7 +91,9 @@ export class MetamaskService {
   }
 
   public logout(){
-    localStorage.removeItem('jwt')
+    localStorage.removeItem('jwt');
+    this.uniswapService.uniswapTableData = [];
+    this.uniswapService.uniswapTableArguments = [];
   }
 
 }

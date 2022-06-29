@@ -15,7 +15,6 @@ export class ExplorerComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    localStorage.removeItem('jwt')
+    localStorage.removeItem('jwt');
   }
-
 }

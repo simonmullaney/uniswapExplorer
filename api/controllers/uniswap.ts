@@ -25,14 +25,14 @@ exports.getUniswapData = async(request, response, next) => {
     console.log("Current Block: ",currentBlock);
 
     let eventFilter:any = "*"
-    const transferEvents = await uniswapInterface.queryFilter(eventFilter,currentBlock-10,currentBlock);
+    const transferEvents = await uniswapInterface.queryFilter(eventFilter,currentBlock-1000,currentBlock);
     // console.log("transferEvents: ",transferEvents);
 
     let transactionArgumentArr =[];
 
     for (let i = 0; i < transferEvents.length; i++) {
       let arg:UniswapArgument = {};
-      console.log("\n\nArgument: ",transferEvents[i].args);
+      // console.log("\n\nArgument: ",transferEvents[i].args);
 
       if(transferEvents[i].event == 'Swap'){
         arg.amount0In = bigNumberToDecimal(transferEvents[i].args.amount0In);
