@@ -1,4 +1,4 @@
-##Getting started
+## Getting started
 
 To start the project run:
 `bash start.sh`
