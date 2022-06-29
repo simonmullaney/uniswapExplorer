@@ -2,6 +2,8 @@ import { BigNumber, Contract, providers } from "ethers";
 import { UNISWAP_PAIR_ABI } from "../abi/abi";
 import { UNISWAP_CONTRACT_ADDRESS } from "../addresses";
 
+
+//Function to get uniswap events for the last 1000 blocks
 exports.getUniswapData = async(request, response, next) => {
   try {
     const provider = providers.getDefaultProvider();
@@ -16,7 +18,7 @@ exports.getUniswapData = async(request, response, next) => {
       sender?: string;
       to?: string;
     }
-  
+
     const uniswapInterface = new Contract(UNISWAP_CONTRACT_ADDRESS, UNISWAP_PAIR_ABI, provider);
 
     const currentBlock = await provider.getBlockNumber();
@@ -41,10 +43,10 @@ exports.getUniswapData = async(request, response, next) => {
     }
 
     return response.status(200).json({
-          'data': {transferEvents:transferEvents,transactionArgumentArr:transactionArgumentArr},
-          'message': 'Success',
-          'status': 'success',
-          'response': 200
+      'data': {transferEvents:transferEvents,transactionArgumentArr:transactionArgumentArr},
+      'message': 'Success',
+      'status': 'success',
+      'response': 200
     });
   } catch (error) {
     console.error(`Failed to evaluate transaction: ${error}`);

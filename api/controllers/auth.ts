@@ -7,48 +7,38 @@ import { config } from '../config'
 
 const nonceObj = {};
 
-
+//Function to return a random nonce
 exports.getNonce = async(request, response, next) => {
-	console.log("Setting random nonce..");
+	// console.log("Setting random nonce..");
 	let ethAddress = request.params.ethAddress;
-	console.log("ethAddress: ",ethAddress);
-
 	let nonce = Math.floor(Math.random() * 10000);
 	nonceObj[ethAddress] = nonce;
-	console.log("nonceObj: ",nonceObj);
 
 	return response.status(200).json({
-				'data': nonce,
-				'message': 'Success',
-				'status': 'success',
-				'response': 200
+		'data': nonce,
+		'message': 'Success',
+		'status': 'success',
+		'response': 200
 	});
 }
 
+//Function to retun a jwt token
 exports.getToken = async(request, response, next) => {
-	console.log("Getting token..");
 	let body = request.body;
-
 	const nonce = nonceObj[body.address].toString();
 
-	// We now are in possession of nonce, publicAddress and signature. We
-	// will use a helper from eth-sig-util to extract the address from the signature
+	// We now have nonce, publicAddress and signature.
+	// Use eth-sig-util to extract the address from the signature
 	const msgBufferHex = bufferToHex(Buffer.from(nonce, 'utf8'));
-
-
-	console.log("msgBufferHex: ",msgBufferHex);
-	console.log("body.signature: ",body.signature);
-
 
 	const address = recoverPersonalSignature({
 		data: msgBufferHex,
 		sig: 	body.signature,
 	});
 
-	// The signature verification is successful if the address found with
+	// Signature verification is successful if the address found with
 	// sigUtil.recoverPersonalSignature matches the initial publicAddress
 	if (address.toLowerCase() === body.address) {
-
 
 		return new Promise<string>((resolve, reject) =>
 			// https://github.com/auth0/node-jsonwebtoken
@@ -59,16 +49,26 @@ exports.getToken = async(request, response, next) => {
 				},
 				(err, token) => {
 					if (err) {
-						return reject(err);
+						response.status(401).send({
+							'error': err,
+							'message': 'Fail',
+							'status': 'Fail',
+							'response': 401
+						});
 					}
 					if (!token) {
-						return new Error('Empty token');
+						response.status(401).send({
+							'error': 'Empty token',
+							'message': 'Fail',
+							'status': 'Fail',
+							'response': 401
+						});
 					}
 					return response.status(200).json({
-								'data': token,
-								'message': 'Success',
-								'status': 'Success',
-								'response': 200
+						'data': token,
+						'message': 'Success',
+						'status': 'Success',
+						'response': 200
 					})
 				}
 			)
@@ -83,11 +83,4 @@ exports.getToken = async(request, response, next) => {
 
 		return null;
 	}
-
-	return response.status(200).json({
-				// 'data': nonce,
-				'message': 'Success',
-				'status': 'success',
-				'response': 200
-	});
 }

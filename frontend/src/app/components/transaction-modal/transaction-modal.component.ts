@@ -12,5 +12,4 @@ export class TransactionModalComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
 }

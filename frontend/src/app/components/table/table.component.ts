@@ -11,7 +11,6 @@ export class TableComponent implements OnInit {
   constructor(public uniswapService: UniswapService) { }
 
   ngOnInit(): void {
-    this.uniswapService.getUniswapData()
+    this.uniswapService.getUniswapData();
   }
-
 }
