@@ -7,8 +7,6 @@ import {config} from "./config";
 var { expressjwt: jwt } = require("express-jwt");
 var mcache = require('memory-cache');
 
-
-
 app.use(express.json())
 app.use(cors());
 app.use('/api/', authRoutes);

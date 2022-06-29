@@ -4,8 +4,7 @@ import { UNISWAP_CONTRACT_ADDRESS } from "../addresses";
 
 exports.getUniswapData = async(request, response, next) => {
   try {
-    const provider = providers.getDefaultProvider()
-    // console.log("provider: ",provider);
+    const provider = providers.getDefaultProvider();
 
     interface UniswapArgument {
       amount0In?: number;
@@ -17,23 +16,16 @@ exports.getUniswapData = async(request, response, next) => {
       sender?: string;
       to?: string;
     }
-
+  
     const uniswapInterface = new Contract(UNISWAP_CONTRACT_ADDRESS, UNISWAP_PAIR_ABI, provider);
 
-    // console.log("uniswapInterface: ",uniswapInterface);
     const currentBlock = await provider.getBlockNumber();
-    console.log("Current Block: ",currentBlock);
-
-    let eventFilter:any = "*"
-    const transferEvents = await uniswapInterface.queryFilter(eventFilter,currentBlock-1000,currentBlock);
-    // console.log("transferEvents: ",transferEvents);
-
+    let eventFilter:any = "*";
     let transactionArgumentArr =[];
+    const transferEvents = await uniswapInterface.queryFilter(eventFilter,currentBlock-1000,currentBlock);
 
     for (let i = 0; i < transferEvents.length; i++) {
       let arg:UniswapArgument = {};
-      // console.log("\n\nArgument: ",transferEvents[i].args);
-
       if(transferEvents[i].event == 'Swap'){
         arg.amount0In = bigNumberToDecimal(transferEvents[i].args.amount0In);
         arg.amount1In = bigNumberToDecimal(transferEvents[i].args.amount1In);
@@ -66,6 +58,6 @@ exports.getUniswapData = async(request, response, next) => {
 }
 
 function bigNumberToDecimal(value: BigNumber, base = 18): number {
-  const divisor = BigNumber.from(10).pow(base)
-  return value.mul(10000).div(divisor).toNumber() / 10000
+  const divisor = BigNumber.from(10).pow(base);
+  return value.mul(10000).div(divisor).toNumber() / 10000;
 }

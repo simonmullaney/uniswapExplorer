@@ -1,14 +1,18 @@
+##Getting started
+
+To start the project run:
+`bash start.sh`
+
+To stop the project run:
+`bash start.sh`
+
 ## Uniswap explorer
 
-Design a full stack application, that displays historical data of a Uniswap contract, with features, like tx hash, link to block explorer for that hash, parsed values displaying the amounts of assets in human readable form. Let the users login with metamask before querying the data.
+Full stack application, that displays historical data of a [uniswap contract](https://etherscan.io/address/0xb4e16d0168e52d35cacd2c6185b44281ec28c9dc), with features:
 
-- The data should be fetched by the backend without using Etherscan API
-- The backend should use ethers.js or web3.js to fetch all the events of a Uniswap swap contract (example link provided below)
-- The backend should interact with authenticated users only, that are connected via metamask
-- The frontend should fetch this historical data for display using the backend API only
-- Additionally: add a cache for the queries on the backend side
-
-### Helpful links
-
-- Uniswap V2, solidity Implementation → [https://docs.uniswap.org/protocol/V2/guides/smart-contract-integration/trading-from-a-smart-contract](https://docs.uniswap.org/protocol/V2/guides/smart-contract-integration/trading-from-a-smart-contract) ( only for context, no solidity needs to be coded itself )
-- Ropsten swap router address example → [https://ropsten.etherscan.io/address/0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D](https://ropsten.etherscan.io/address/0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D)
+- Tx hash, link to block explorer for that hash
+- Parsed values displaying the amounts of assets in human readable form.
+- The backend uses ethers.js to fetch all events in the last 1000 blocks
+- The backend interacts with authenticated users only, that are connected via MetaMask
+- The frontend fetches historical data for display using the backend API only
+- API cache implemented for Uniswap queries using [memory-cache](https://www.npmjs.com/package/memory-cache) for similar queries made within 20 seconds of each other
