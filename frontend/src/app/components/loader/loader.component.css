@@ -10,6 +10,7 @@
           justify-content: center;
   min-height: 100vh;
   background-color: #ffff;
+  z-index: 10;
 }
 .loader {
   max-width: 15rem;
