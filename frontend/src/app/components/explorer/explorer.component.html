@@ -1,4 +1,5 @@
 <app-navbar></app-navbar>
 <app-login *ngIf="!this.metamaskService.isLoggedIn()"></app-login>
+<app-loader *ngIf="this.uniswapService.loading"></app-loader>
 <app-transaction-modal *ngIf="this.uniswapService.showTransactionModal && this.metamaskService.isLoggedIn()"></app-transaction-modal>
 <app-table *ngIf="this.metamaskService.isLoggedIn()"></app-table>
