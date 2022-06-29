@@ -4,7 +4,7 @@ To start the project run:
 `bash start.sh`
 
 To stop the project run:
-`bash start.sh`
+`bash stop.sh`
 
 ## Uniswap explorer
 
