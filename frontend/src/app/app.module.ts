@@ -10,6 +10,7 @@ import { TransactionModalComponent } from './components/transaction-modal/transa
 import { MetamaskService } from "./services/metamask.service";
 import { environment } from '../environments/environment';
 import { LoginComponent } from './components/login/login.component';
+import { LoaderComponent } from './components/loader/loader.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { LoginComponent } from './components/login/login.component';
     NavbarComponent,
     TableComponent,
     TransactionModalComponent,
-    LoginComponent
+    LoginComponent,
+    LoaderComponent
   ],
   imports: [
     BrowserModule,

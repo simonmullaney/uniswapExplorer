@@ -14,15 +14,15 @@ export class MetamaskService {
 
   constructor(private httpClient: HttpClient, private uniswapService: UniswapService) { }
 
+  //fucntion to sign in with MetaMask
   public async signInWithMetaMask() {
-    console.log("signInWithMetaMask");
     let __this = this;
     try {
       // return from(detectEthereumProvider()).pipe(
         // Step 1: Request (limited) access to users ethereum account
         const provider :any = await detectEthereumProvider()
         if (provider) {
-          console.log('Ethereum successfully detected!')
+          // console.log('Ethereum successfully detected!')
           const chainId = await provider.request({
             method: 'eth_requestAccounts'
           })
@@ -31,12 +31,10 @@ export class MetamaskService {
           throw new Error('Please install MetaMask');
         }
 
-
         // Step 2: Retrieve the current nonce for the requested address
         await this.httpClient.get(config.apiUrl + '/auth/nonce/' +provider.selectedAddress)
         .toPromise()
         .then((response: any) => {
-          console.log(response);
           __this.nonce = response.data.toString()
         })
 
@@ -48,21 +46,15 @@ export class MetamaskService {
                 provider.selectedAddress,
               ],
             })
-      console.log("Signature: ",signature);
-      console.log("Provider.selectedAddress: ", provider.selectedAddress);
 
       const headers = new HttpHeaders();
       headers.set('Content-Type', 'application/json; charset=utf-8');
       const body = { address: provider.selectedAddress, signature: signature };
 
-      console.log(body);
-
-
       // Step 4: If the signature is valid, retrieve a custom auth token
       await this.httpClient.post(config.apiUrl + '/auth/token',body,{headers:headers})
       .toPromise()
       .then((response: any) => {
-        console.log(response);
         localStorage.setItem('jwt',response.data)
         __this.uniswapService.getUniswapData()
       })
@@ -70,18 +62,16 @@ export class MetamaskService {
       console.log(error);
       return
     }
-
-      }
-
+  }
+  //convert string to hex
   private toHex(stringToConvert: string) {
-    console.log("Converting to hex: ",stringToConvert);
-
     return stringToConvert
       .split('')
       .map((c) => c.charCodeAt(0).toString(16).padStart(2, '0'))
       .join('');
   }
 
+  //function to check if user is logged in
   public isLoggedIn(){
     if(localStorage.getItem('jwt')){
       return true
@@ -90,10 +80,10 @@ export class MetamaskService {
     }
   }
 
+  //function to logout
   public logout(){
     localStorage.removeItem('jwt');
     this.uniswapService.uniswapTableData = [];
     this.uniswapService.uniswapTableArguments = [];
   }
-
 }

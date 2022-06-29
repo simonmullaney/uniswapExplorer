@@ -2,8 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient,HttpHeaders } from '@angular/common/http';
 import config from './../config.json';
 
-
-
 @Injectable({
   providedIn: 'root'
 })
@@ -13,41 +11,34 @@ export class UniswapService {
   showTransactionModal:boolean = false;
   eventType:any;
   transactionArg:any;
+  loading:boolean = false;
 
   constructor(
     private httpClient: HttpClient
   ) { }
 
+  //function to get uniswap data from API
   getUniswapData(){
     let __this = this;
-    console.log("Getting uniswap data...");
-
-    // console.log(this.metamaskService.jwt);
+    this.loading =true;
     let jwt = localStorage.getItem('jwt')
-
-    console.log(`Bearer ${jwt}`);
     const headers = new HttpHeaders({'Authorization':`Bearer ${jwt}`});
-
-    console.log(headers);
 
     return this.httpClient.get(config.apiUrl + '/uniswap',{headers:headers})
     .toPromise()
     .then((response: any) => {
+      __this.loading = false;
       __this.uniswapTableData = response.data.transferEvents;
       __this.uniswapTableArguments = response.data.transactionArgumentArr;
-      console.log("response",response);
-      console.log("response.data.transactionArgumentArr",response.data.transactionArgumentArr);
-      console.log("__this.uniswapTableData: ", __this.uniswapTableData);
     })
   }
-
+  //function to show modal
   showModal(txArg:any,txType:any){
-    console.log("Showing modal: ",txArg);
     this.showTransactionModal=true;
     this.eventType = txType;
     this.transactionArg = txArg;
-    console.log(this.showTransactionModal);
   }
+  //function to close modal
   closeModal(){
     this.showTransactionModal=false;
   }
